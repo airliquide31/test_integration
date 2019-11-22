@@ -34,10 +34,6 @@ task2 = BashOperator(
     dag=dag,
 )
 
-t1 = PythonOperator(task_id='add_columns_values',
-                    python_callable=add_columns_and_values,
-                    dag=dag)
-
 def setEndTime():
     Variable.set("last_execution_date_succes", "{{ execution_date }}")
 
