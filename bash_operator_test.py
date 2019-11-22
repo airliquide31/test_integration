@@ -27,7 +27,7 @@ task = BashOperator(
 
 task2 = BashOperator(
     task_id='task2',
-    bash_command='echo "{{ task_instance_key_str }} Now {{ execution_date }}" && sleep 1',
+    bash_command='echo "{{ task_instance_key_str }} Now {{ execution_date }} Prec {{ execution_date }}" && sleep 1',
     dag=dag,
 )
 
