@@ -21,7 +21,7 @@ dag = DAG(
 
 task = BashOperator(
     task_id='task1',
-    bash_command='echo "{{ task_instance_key_str }} Now {{ execution_date }}  Prev {{ prev_execution_date_success }} " && sleep 1',
+    bash_command='echo "{{ task_instance_key_str }} Now {{ execution_date }}  Prev {{ prev_start_date_success }} " && sleep 1',
     dag=dag,
     )
 
