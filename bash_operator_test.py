@@ -31,9 +31,23 @@ task = BashOperator(
 task2 = BashOperator(
     task_id='task2',
     bash_command='echo "{{ task_instance_key_str }} Now {{ execution_date }} Prec {{ var.value.last_execution_date_succes }} " && sleep 1',
-    dibe,
     dag=dag,
 )
+
+
+task5 = BashOperator(
+    task_id='task5',
+    bash_command='echo "{{ task_instance_key_str }} Now {{ execution_date }} Prec {{ var.value.last_execution_date_succes }} " && sleep 1',
+    dag=dag,
+)
+
+task4 = BashOperator(
+    task_id='task4',
+    bash_command='echo "{{ task_instance_key_str }} Now {{ execution_date }} Prec {{ var.value.last_execution_date_succes }} " && sleep 1',
+    dag=dag,
+)
+
+
 
 def setEndTime(**kwargs):
     Variable.set('last_execution_date_succes', kwargs['execution_date'])
@@ -43,7 +57,10 @@ task3 = PythonOperator(task_id='setTime',
                     python_callable=setEndTime,
                     dag=dag)
 
-task >> task2 >> task3
+task >> task2 >> [task5,task4] >> task3
+
+
+
 
 if __name__ == "__main__":
     dag.cli()
